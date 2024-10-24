@@ -207,3 +207,7 @@ input:checked + .slider:before {
     margin-left: 19px;
 }
 
+.display {
+    display: none;
+}
+
