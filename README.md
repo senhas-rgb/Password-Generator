@@ -4,5 +4,3 @@ You can add a charachter limit to each option.
 
 By following the link, you can visit the site:
 https://easypasswordgenerator.vercel.app
-
-[!!CURRENTLY NO MOBILE SUPPORT]
