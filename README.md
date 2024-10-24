@@ -7,5 +7,6 @@ You can even resuffle the generated password
 
 By following the link, you can visit the site:
 https://easypasswordgenerator.vercel.app
+
 Alternate link: 
 https://sadevem.github.io/Password-Generator/
