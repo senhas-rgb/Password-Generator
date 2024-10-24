@@ -262,7 +262,6 @@ input:checked + .slider:before {
     #shuffle-btn, #copy-btn {
         height: 15px;
         cursor: pointer;
-        display: block;
         position: relative;
     }
 
