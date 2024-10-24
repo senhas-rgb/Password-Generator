@@ -189,7 +189,7 @@ input:checked + .slider:before {
 .range {
     border: 0;
     outline: 0;
-    width: 30px;
+    width: 33px;
 
     padding: 5px 10px;
     border-radius: 20px;
