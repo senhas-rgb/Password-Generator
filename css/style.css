@@ -68,7 +68,11 @@ header span {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 35px;
+    margin-top: 25px;
+    
+    background-color: #1a1a1a;
+    padding: 10px 0;
+    border-radius: 30px;
 }
 
 #shuffle-btn {
@@ -100,4 +104,13 @@ header span {
     border-radius: 20px;
 
     cursor: pointer;
+}
+
+#pass-len {
+    border: 0;
+    outline: 0;
+
+    margin-left: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
 }
