@@ -5,8 +5,9 @@ const char = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+","\"","|","
 let password = [];
 
 const generateBtn = document.querySelector("#generate-btn");
-const shuffleBtn = document.querySelector("#shuffle-btn")
-const inputBox = document.querySelector("#input-box")
+const copyBtn = document.querySelector("#copy-btn");
+const shuffleBtn = document.querySelector("#shuffle-btn");
+const inputBox = document.querySelector("#input-box");
 
 const letterRange = document.querySelector("#letter-range");
 const numberRange = document.querySelector("#number-range");
@@ -45,7 +46,32 @@ function shuffle() {
 }
 
 generateBtn.addEventListener("click", () => {
+    let checkboxNotSelected = 0;
     password = [];
+
+    if (letterCheck.checked) {
+        genLetters();
+    } else {
+        ++checkboxNotSelected;
+    }
+
+    if (numberCheck.checked) {
+        genNumbers();
+    } else {
+        ++checkboxNotSelected;
+    }
+
+    if (charCheck.checked) {
+        genChars();
+    } else {
+        ++checkboxNotSelected;
+    }
+
+    if (checkboxNotSelected == 3) {
+        alert("Select at least one option from below")
+        return;
+    }
+
     if (letterRange.value > 10 || numberRange.value > 10 || charRange.value > 10) {
         alert("Maximum limit is 10")
         return;
@@ -54,18 +80,16 @@ generateBtn.addEventListener("click", () => {
         alert("Minimum limit is 1")
         return;
     }
-    if (letterCheck.checked) {
-        genLetters();
-    }
-    if (numberCheck.checked) {
-        genNumbers();
-    }
-    if (charCheck.checked) {
-        genChars();
-    }
-    shuffle();
-    inputBox.value = password.toString().replaceAll(",","");
 
+    shuffle();
+
+    inputBox.value = password.toString().replaceAll(",","");
+    copyBtn.style.display = "inline-block"
+})
+
+copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(inputBox.value);
+    alert("Copied to clipboard");
 })
 
 shuffleBtn.addEventListener("click", () => {

@@ -75,9 +75,14 @@ header span {
     border-radius: 30px;
 }
 
-#shuffle-btn {
+#shuffle-btn, #copy-btn {
     height: 30px;
     cursor: pointer;
+}
+
+#copy-btn{
+    display: none;
+    margin-right: 15px;
 }
 
 #input-box {
