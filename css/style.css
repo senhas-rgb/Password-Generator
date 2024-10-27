@@ -351,8 +351,6 @@ input:checked + .slider:before {
 }
 
 .footer {
-    display: flex;
-    flex-direction: column;
 
     background-color: #111111;
     height: 30px;
@@ -364,4 +362,3 @@ input:checked + .slider:before {
     padding: 15px;
 
 }
-
