@@ -349,3 +349,19 @@ input:checked + .slider:before {
         margin-left: 35px;
     }
 }
+
+.footer {
+    display: flex;
+    flex-direction: column;
+
+    background-color: #111111;
+    height: 30px;
+    width: 700px;
+
+    margin: 40px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 8px black;
+    padding: 15px;
+
+}
+
