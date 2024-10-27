@@ -63,7 +63,7 @@ header span {
 }
 
 .row {
-    width: 100%;
+    width: 520px;
     height: max-content;
     display: flex;
     justify-content: center;
@@ -88,7 +88,7 @@ header span {
 #input-box {
     border: 0;
     outline: 0;
-    width: 50%;
+    width: 280px;
 
     padding: 10px 15px;
     border-radius: 20px;
