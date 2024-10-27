@@ -109,3 +109,6 @@ charCheck.addEventListener("click", () => {
     charRange.classList.toggle("display")
 })
 
+function redirectLink(link) {
+    return window.location.replace(link)
+}
