@@ -4,7 +4,7 @@ const char = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+","\"","|","
 
 let password = [];
 
-const generateBtn = document.querySelector("#generate-btn");
+const generateBtn = document.querySelector("#general-btn");
 const copyBtn = document.querySelector("#copy-btn");
 const shuffleBtn = document.querySelector("#shuffle-btn");
 const inputBox = document.querySelector("#input-box");
