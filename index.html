@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Easy Passwords - A simple and secure password generator">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">  
@@ -12,54 +13,66 @@
 </head>
 <body>
     <div class="container">
+        <!-- Header Section -->
         <header>
-            <img src="icons/passwordLogo.png" alt="Passoword Logo">
+            <img src="icons/passwordLogo.png" alt="Password Logo">
             <h1>Easy<span>Passwords</span></h1>
         </header>
-        <div class="app">
+        <main class="app">
+            <!-- Main App Section -->
             <h2>Generate</h2>
             <h3>Password</h3>
 
             <div class="row">
-                <input type="text" id="input-box" placeholder="Click Generate to generate password" disabled>
-                <button id="general-btn">Generate</button>
+                <input type="text" id="input-box" placeholder="Click Generate to start" readonly aria-label="Generated password">
+                <button id="generate-btn" type="button">Generate</button>
                 <div class="buttons">
-                    <img src="icons/copy.png" id="copy-btn" title="Copy" alt="Copy Icon">
-                    <img src="icons/shuffle.png" id="shuffle-btn" title="Shuffle" alt="Shuffle Icon">
+                    <button type="button" class="icon-button" id="copy-btn" title="Copy password">
+                        <img src="icons/copy.png" alt="Copy Icon">
+                    </button>
+                    <button type="button" class="icon-button" id="shuffle-btn" title="Shuffle password">
+                        <img src="icons/shuffle.png" alt="Shuffle Icon">
+                    </button>
                 </div>
             </div>
 
             <div class="options">
+                <!-- Password Options Section -->
                 <div class="option-row">
                     <label class="switch">
-                        <input type="checkbox" id="letter-check">
+                        <input type="checkbox" id="letter-check" aria-label="Include letters">
                         <span class="slider"></span>
                     </label>
-                    <p>Letter</p>
-                    <input type="number" value="1" min="1" max="10" class="range display" id="letter-range">
+                    <p>Letters</p>
+                    <input type="number" value="1" min="1" max="10" class="range display" id="letter-range" aria-label="Number of letters">
                 </div>
                 <div class="option-row">
                     <label class="switch">
-                        <input type="checkbox" id="number-check">
+                        <input type="checkbox" id="number-check" aria-label="Include numbers">
                         <span class="slider"></span>
                     </label>
                     <p>Numbers</p>
-                    <input type="number" value="1" min="1" max="10" class="range display" id="number-range">
+                    <input type="number" value="1" min="1" max="10" class="range display" id="number-range" aria-label="Number of numbers">
                 </div>
                 <div class="option-row">
                     <label class="switch">
-                        <input type="checkbox" id="char-check">
+                        <input type="checkbox" id="char-check" aria-label="Include special characters">
                         <span class="slider"></span>
                     </label>
                     <p>Special Characters</p>
-                    <input type="number" value="1" min="1" max="10" class="range display" id="char-range">
+                    <input type="number" value="1" min="1" max="10" class="range display" id="char-range" aria-label="Number of special characters">
                 </div>
             </div>
-        </div>
-            <div class="footer row">
-                <a href="https://github.com/SadeveM/Password-Generator"><button id="general-btn">Contribute</button></a>
-                <a href="https://github.com/SadeveM"><button id="general-btn">About me</button></a>
-            </div>
+        </main>
+        <footer class="footer row">
+            <!-- Footer Section -->
+            <a href="https://github.com/SadeveM/Password-Generator">
+                <button type="button" class="general-btn">Contribute</button>
+            </a>
+            <a href="https://github.com/SadeveM">
+                <button type="button" class="general-btn">About me</button>
+            </a>
+        </footer>
     </div>
     <script src="index.js"></script>
 </body>
