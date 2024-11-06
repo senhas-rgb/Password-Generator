@@ -1,114 +1,139 @@
-const letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-const numbers = ["1","2","3","4","5","6","7","8","9","0"];
-const char = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+","\"","|",",","{","}",";",":","/","?"]
+// Arrays containing possible characters for password generation
+const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+const numbers = '0123456789'.split('');
+const char = '!@#$%^&*()-_=+"|,{};:/?'.split('');
 
+// Store the generated password
 let password = [];
 
-const generateBtn = document.querySelector("#general-btn");
-const copyBtn = document.querySelector("#copy-btn");
-const shuffleBtn = document.querySelector("#shuffle-btn");
-const inputBox = document.querySelector("#input-box");
+// DOM element selections
+const generateBtn = document.querySelector('#generate-btn');
+const copyBtn = document.querySelector('#copy-btn');
+const shuffleBtn = document.querySelector('#shuffle-btn');
+const inputBox = document.querySelector('#input-box');
 
-const letterRange = document.querySelector("#letter-range");
-const numberRange = document.querySelector("#number-range");
-const charRange = document.querySelector("#char-range");
+// Range input selections
+const letterRange = document.querySelector('#letter-range');
+const numberRange = document.querySelector('#number-range');
+const charRange = document.querySelector('#char-range');
 
-const letterCheck = document.querySelector("#letter-check");
-const numberCheck = document.querySelector("#number-check");
-const charCheck = document.querySelector("#char-check");
+// Checkbox selections
+const letterCheck = document.querySelector('#letter-check');
+const numberCheck = document.querySelector('#number-check');
+const charCheck = document.querySelector('#char-check');
 
+/**
+ * Gets a random element from an array
+ * @param {Array} arr - The array to select from
+ * @returns {*} A random element from the array
+ */
+function getRandomElement(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Generates an array of random elements
+ * @param {Array} arr - Source array
+ * @param {number} count - Number of elements to generate
+ * @returns {Array} Array of random elements
+ */
+function generateElements(arr, count) {
+    return Array.from({length: count}, () => getRandomElement(arr));
+}
+
+// Generator functions for each character type
 function genLetters() {
-    for (let i=0; i<letterRange.value; i++){
-        const randomLetter = letters[Math.floor(Math.random() * letters.length)];
-        password.push(randomLetter);
-    }
+    password.push(...generateElements(letters, parseInt(letterRange.value)));
 }
 
 function genNumbers() {
-    for (let i=0; i<numberRange.value; i++){
-        const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
-        password.push(randomNumber);
-    }
+    password.push(...generateElements(numbers, parseInt(numberRange.value)));
 }
 
 function genChars() {
-    for (let i=0; i<charRange.value; i++){
-        const randomChar = char[Math.floor(Math.random() * char.length)];
-        password.push(randomChar);
-    }
+    password.push(...generateElements(char, parseInt(charRange.value)));
 }
 
+/**
+ * Shuffles the password array using Fisher-Yates algorithm
+ */
 function shuffle() {
-    for (let i = password.length - 1; i >= 0; i--) {
-        const randomIndex = Math.floor(Math.random() * (i));
-        [password[i], password[randomIndex]] = [password[randomIndex], password[i]];
+    for (let i = password.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [password[i], password[j]] = [password[j], password[i]];
     }
 }
 
-generateBtn.addEventListener("click", () => {
-    let checkboxNotSelected = 0;
+/**
+ * Validates the range inputs
+ * @returns {boolean} True if valid, false otherwise
+ */
+function validateRanges() {
+    const ranges = [letterRange, numberRange, charRange];
+    const value = range => parseInt(range.value);
+    
+    if (ranges.some(range => value(range) > 10)) {
+        alert('Maximum limit is 10');
+        return false;
+    }
+    if (ranges.some(range => value(range) < 1)) {
+        alert('Minimum limit is 1');
+        return false;
+    }
+    return true;
+}
+
+// Event Listeners
+generateBtn.addEventListener('click', () => {
     password = [];
+    const checks = [
+        [letterCheck, genLetters],
+        [numberCheck, genNumbers],
+        [charCheck, genChars]
+    ];
 
-    if (letterCheck.checked) {
-        genLetters();
-    } else {
-        ++checkboxNotSelected;
-    }
-
-    if (numberCheck.checked) {
-        genNumbers();
-    } else {
-        ++checkboxNotSelected;
-    }
-
-    if (charCheck.checked) {
-        genChars();
-    } else {
-        ++checkboxNotSelected;
-    }
-
-    if (checkboxNotSelected == 3) {
-        alert("Select at least one option from below")
+    const selectedOptions = checks.filter(([check]) => check.checked);
+    
+    if (!selectedOptions.length) {
+        alert('Select at least one option from below');
         return;
     }
 
-    if (letterRange.value > 10 || numberRange.value > 10 || charRange.value > 10) {
-        alert("Maximum limit is 10")
-        return;
-    }
-    if (letterRange.value < 1 || numberRange.value < 1 || charRange.value < 1) {
-        alert("Minimum limit is 1")
-        return;
-    }
+    if (!validateRanges()) return;
 
+    selectedOptions.forEach(([, generator]) => generator());
     shuffle();
+    
+    inputBox.value = password.join('');
+    copyBtn.style.display = 'inline-block';
+});
 
-    inputBox.value = password.toString().replaceAll(",","");
-    copyBtn.style.display = "inline-block"
-})
+// Copy button functionality
+copyBtn.addEventListener('click', async () => {
+    try {
+        await navigator.clipboard.writeText(inputBox.value);
+        alert('Copied to clipboard');
+    } catch (err) {
+        alert('Failed to copy to clipboard');
+    }
+});
 
-copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(inputBox.value);
-    alert("Copied to clipboard");
-})
-
-shuffleBtn.addEventListener("click", () => {
+// Shuffle button functionality
+shuffleBtn.addEventListener('click', () => {
     shuffle();
-    inputBox.value = password.toString().replaceAll(",","");
-})
+    inputBox.value = password.join('');
+});
 
-letterCheck.addEventListener("click", () => {
-    letterRange.classList.toggle("display")
-})
-
-numberCheck.addEventListener("click", () => {
-    numberRange.classList.toggle("display")
-})
-
-charCheck.addEventListener("click", () => {
-    charRange.classList.toggle("display")
-})
-
-function redirectLink(link) {
-    return window.location.replace(link)
+/**
+ * Creates a toggle handler for range inputs
+ * @param {HTMLElement} range - The range input element
+ * @returns {Function} Toggle handler function
+ */
+function createToggleHandler(range) {
+    return () => range.classList.toggle('display');
 }
+
+// Add toggle handlers to checkboxes
+letterCheck.addEventListener('click', createToggleHandler(letterRange));
+numberCheck.addEventListener('click', createToggleHandler(numberRange));
+charCheck.addEventListener('click', createToggleHandler(charRange));
