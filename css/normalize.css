@@ -6,22 +6,34 @@
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
+ * 3. Set box-sizing to border-box for more predictable layouts
+ * 4. Set smooth scrolling behavior
  */
 
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  box-sizing: border-box; /* 3 */
+  scroll-behavior: smooth; /* 4 */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 /* Sections
    ========================================================================== */
 
 /**
- * Remove the margin in all browsers.
+ * 1. Remove the margin in all browsers.
+ * 2. Improve text rendering
  */
 
 body {
-  margin: 0;
+  margin: 0; /* 1 */
+  -webkit-font-smoothing: antialiased; /* 2 */
+  -moz-osx-font-smoothing: grayscale; /* 2 */
+  text-rendering: optimizeLegibility; /* 2 */
 }
 
 /**
@@ -54,6 +66,9 @@ hr {
   box-sizing: content-box; /* 1 */
   height: 0; /* 1 */
   overflow: visible; /* 2 */
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 1em 0;
 }
 
 /**
@@ -64,6 +79,8 @@ hr {
 pre {
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
+  overflow: auto;
+  max-width: 100%;
 }
 
 /* Text-level semantics
@@ -75,6 +92,8 @@ pre {
 
 a {
   background-color: transparent;
+  text-decoration: none;
+  color: inherit;
 }
 
 /**
@@ -86,6 +105,7 @@ abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
   text-decoration: underline dotted; /* 2 */
+  cursor: help;
 }
 
 /**
@@ -147,6 +167,8 @@ sup {
 
 img {
   border-style: none;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Forms
@@ -155,6 +177,7 @@ img {
 /**
  * 1. Change the font styles in all browsers.
  * 2. Remove the margin in Firefox and Safari.
+ * 3. Improve consistency of default fonts in all browsers
  */
 
 button,
@@ -166,6 +189,7 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+  padding: 0.5em 1em; /* 3 */
 }
 
 /**
@@ -197,6 +221,7 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
+  cursor: pointer;
 }
 
 /**
@@ -228,6 +253,8 @@ button:-moz-focusring,
 
 fieldset {
   padding: 0.35em 0.75em 0.625em;
+  border: 1px solid #ddd;
+  margin: 0;
 }
 
 /**
@@ -260,6 +287,7 @@ progress {
 
 textarea {
   overflow: auto;
+  resize: vertical;
 }
 
 /**
@@ -327,6 +355,7 @@ details {
 
 summary {
   display: list-item;
+  cursor: pointer;
 }
 
 /* Misc
